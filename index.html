@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 1868px;
+            height: 891px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/ELECTORAL_DISTRICT_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[40.8171873029581,-113.36583132966445],[57.49621628803285,-59.122053935104795]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_ELECTORAL_DISTRICT_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th colspan="2">' + (feature.properties['ENGLISH_NA'] !== null ? Autolinker.link(String(feature.properties['ENGLISH_NA'])) : '') + '</th>\
+                    </tr>\
+                    <tr>\
+                        <td scope="row">Region:</td>\
+                        <td>' + (feature.properties['RVP_Region Title'] !== null ? Autolinker.link(String(feature.properties['RVP_Region Title'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ELECTORAL_DISTRICT_1_0(feature) {
+            switch(String(feature.properties['RVP_Region Title'])) {
+                case 'Central East':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(143,123,220,1.0)',
+            }
+                    break;
+                case 'Central West':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(105,218,228,1.0)',
+            }
+                    break;
+                case 'Durham':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(203,67,106,1.0)',
+            }
+                    break;
+                case 'GTA East':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(198,70,202,1.0)',
+            }
+                    break;
+                case 'GTA North':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(213,80,169,1.0)',
+            }
+                    break;
+                case 'GTA West':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(64,93,235,1.0)',
+            }
+                    break;
+                case 'Halton':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(176,114,220,1.0)',
+            }
+                    break;
+                case 'London':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(229,157,93,1.0)',
+            }
+                    break;
+                case 'Niagara':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(189,208,121,1.0)',
+            }
+                    break;
+                case 'Northern':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(222,43,27,1.0)',
+            }
+                    break;
+                case 'Ottawa':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(211,185,52,1.0)',
+            }
+                    break;
+                case 'South-West':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(135,237,61,1.0)',
+            }
+                    break;
+                case 'Sudbury':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(55,212,165,1.0)',
+            }
+                    break;
+                case 'Toronto':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(90,202,84,1.0)',
+            }
+                    break;
+                case 'York':
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(80,155,216,1.0)',
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_ELECTORAL_DISTRICT_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 0.4,
+                fillColor: 'rgba(42,232,105,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ELECTORAL_DISTRICT_1');
+        map.getPane('pane_ELECTORAL_DISTRICT_1').style.zIndex = 401;
+        map.getPane('pane_ELECTORAL_DISTRICT_1').style['mix-blend-mode'] = 'normal';
+        var layer_ELECTORAL_DISTRICT_1 = new L.geoJson(json_ELECTORAL_DISTRICT_1, {
+            attribution: '',
+            pane: 'pane_ELECTORAL_DISTRICT_1',
+            onEachFeature: pop_ELECTORAL_DISTRICT_1,
+            style: style_ELECTORAL_DISTRICT_1_0,
+        });
+        bounds_group.addLayer(layer_ELECTORAL_DISTRICT_1);
+        map.addLayer(layer_ELECTORAL_DISTRICT_1);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'ELECTORAL_DISTRICT<br /><table><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_CentralEast0.png" /></td><td>Central East</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_CentralWest1.png" /></td><td>Central West</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_Durham2.png" /></td><td>Durham</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_GTAEast3.png" /></td><td>GTA East</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_GTANorth4.png" /></td><td>GTA North</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_GTAWest5.png" /></td><td>GTA West</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_Halton6.png" /></td><td>Halton</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_London7.png" /></td><td>London</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_Niagara8.png" /></td><td>Niagara</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_Northern9.png" /></td><td>Northern</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_Ottawa10.png" /></td><td>Ottawa</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_SouthWest11.png" /></td><td>South-West</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_Sudbury12.png" /></td><td>Sudbury</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_Toronto13.png" /></td><td>Toronto</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_York14.png" /></td><td>York</td></tr><tr><td style="text-align: center;"><img src="legend/ELECTORAL_DISTRICT_1_15.png" /></td><td></td></tr></table>': layer_ELECTORAL_DISTRICT_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        map.on("zoomend", function(){
+
+                if (map.hasLayer(layer_ELECTORAL_DISTRICT_1)) {
+                    if (map.getZoom() <= 4 && map.getZoom() >= 16) {
+                        layer_ELECTORAL_DISTRICT_1.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_ELECTORAL_DISTRICT_1.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        });
+        setBounds();
+        var i = 0;
+        layer_ELECTORAL_DISTRICT_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['ENGLISH_NA'] !== null?String('<div style="color: #000000; font-size: 8pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['ENGLISH_NA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ELECTORAL_DISTRICT_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+                if (map.hasLayer(layer_ELECTORAL_DISTRICT_1)) {
+                    if (map.getZoom() <= 4 && map.getZoom() >= 16) {
+                        layer_ELECTORAL_DISTRICT_1.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_ELECTORAL_DISTRICT_1.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        map.addControl(new L.Control.Search({
+            layer: layer_ELECTORAL_DISTRICT_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'ENGLISH_NA'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_ELECTORALDISTRICT_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_ELECTORALDISTRICT_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_ELECTORALDISTRICT_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_ELECTORALDISTRICT_1]);
+        });
+        </script>
+    </body>
+</html>
